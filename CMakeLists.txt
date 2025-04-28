@@ -13,7 +13,7 @@ configure_file(WordCheckerConfig.h.in WordCheckerConfig.h)
 
 add_subdirectory(MathFunctions)
 
-find_package(wxWidgets REQUIRED COMPONENTS net core base)
+find_package(wxWidgets REQUIRED COMPONENTS net core base richtext)
 if(wxWidgets_USE_FILE) # not defined in CONFIG mode
     include(${wxWidgets_USE_FILE})
 endif()
