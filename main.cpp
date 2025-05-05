@@ -136,15 +136,7 @@ void MyFrame::OnButton1Click(wxCommandEvent& even)
 	wxString textFromLeft = m_richTextCtrlLeft->GetValue();
 
 	// vvv Check Happens Here vvv
-	constexpr std::array<char, 2> blocked_characters{'\n', '\t'};
-
-
-	std::cout << blocked_characters.at(0) << std::endl;
-
 	std::string text = textFromLeft.utf8_string();
-
-	std::cout << text << std::endl; 
-	std::cout << std::endl;
 
 	std::replace(text.begin(), text.end(), '\n', ' ');
 	std::replace(text.begin(), text.end(), '\t', ' ');
@@ -172,11 +164,6 @@ void MyFrame::OnButton1Click(wxCommandEvent& even)
 		}
 	}
 	text = "";
-
-	for(int i = 0; i < index.size(); i++)
-	{
-		std::cout << std::get<0>(index.at(i)) << " : " << std::get<1>(index.at(i)) << std::endl;
-	}
 
 	if(how_much_did == 0){
 		wxLogMessage("Lutfen soldaki kutuya bir seyler yaz!");
@@ -225,12 +212,12 @@ void MyFrame::OnButton1Click(wxCommandEvent& even)
 	//}
 	
 	std::sort(index.begin(), index.end(),
-    [](const auto& a, const auto& b) {
-        if (a.second != b.second) {
-            return a.second > b.second;
-        }
-        return a.first > b.first;
-    });
+	[](const auto& a, const auto& b) {
+		if (a.second != b.second) {
+			return a.second > b.second;
+		}
+		return a.first > b.first;
+	});
 
 	for(int i = 0; i < index.size(); i++){
 		text += std::get<0>(index.at(i)) + " : " + std::to_string(std::get<1>(index.at(i))) + '\n';
@@ -243,12 +230,12 @@ void MyFrame::OnButton1Click(wxCommandEvent& even)
 	m_richTextCtrlRight->SetValue(textFromLeft);
 }
 
-   void MyFrame::OnButton2Click(wxCommandEvent& event)
-   {
-       wxLogMessage("Yakinda Geliyor!");
-   }
+void MyFrame::OnButton2Click(wxCommandEvent& event)
+{
+	wxLogMessage("Yakinda Geliyor!");
+}
 
-   void MyFrame::OnButton3Click(wxCommandEvent& event)
-   {
-       wxLogMessage("Yakinda Geliyor!");
-   }
+void MyFrame::OnButton3Click(wxCommandEvent& event)
+{
+	wxLogMessage("Yakinda Geliyor!");
+}
