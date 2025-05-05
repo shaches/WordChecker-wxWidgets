@@ -138,9 +138,13 @@ void MyFrame::OnButton1Click(wxCommandEvent& even)
 	// vvv Check Happens Here vvv
 	constexpr std::array<char, 2> blocked_characters{'\n', '\t'};
 
+
 	std::cout << blocked_characters.at(0) << std::endl;
 
-	std::string text = textFromLeft.ToStdString();
+	std::string text = textFromLeft.utf8_string();
+
+	std::cout << text << std::endl; 
+	std::cout << std::endl;
 
 	std::replace(text.begin(), text.end(), '\n', ' ');
 	std::replace(text.begin(), text.end(), '\t', ' ');
@@ -148,8 +152,6 @@ void MyFrame::OnButton1Click(wxCommandEvent& even)
 	text += " ";
 
 	std::vector<std::pair<std::string,int>> index;
-
-	// std::vector<std::pair<std::string, int>> index;
 
 	// Seperate the sentence into words
 	bool did_it = false;
@@ -171,6 +173,11 @@ void MyFrame::OnButton1Click(wxCommandEvent& even)
 	}
 	text = "";
 
+	for(int i = 0; i < index.size(); i++)
+	{
+		std::cout << std::get<0>(index.at(i)) << " : " << std::get<1>(index.at(i)) << std::endl;
+	}
+
 	if(how_much_did == 0){
 		wxLogMessage("Lutfen soldaki kutuya bir seyler yaz!");
 		return;
@@ -178,7 +185,7 @@ void MyFrame::OnButton1Click(wxCommandEvent& even)
 
 	if(index.size() == 1){
 		text += std::get<0>(index.at(0)) + " : 1\n";
-		textFromLeft = text;
+		textFromLeft = wxString::FromUTF8(text);
 		m_richTextCtrlRight->SetValue(textFromLeft);
 		return;
 	}
@@ -229,7 +236,7 @@ void MyFrame::OnButton1Click(wxCommandEvent& even)
 		text += std::get<0>(index.at(i)) + " : " + std::to_string(std::get<1>(index.at(i))) + '\n';
 	}
 
-	textFromLeft = text;
+	textFromLeft = wxString::FromUTF8(text);
 
 	// ^^^ Check Happens Here ^^^
 
